@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{%block title %}Login{% endblock %}
+{% block HTML_BODY %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+                {% with error_signup = get_flashed_messages(category_filter=["error_signup"]) %}
+                <div class="card-header">
+                    <ul class="nav nav-pills nav-fill" id="toggle-forms" role="tablist">
+                        {% if error_signup %}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-toggle="tab" href="#login-form">Login</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-toggle="tab" href="#signup-form">Sign Up</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-toggle="tab" href="#login-form">Login</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-toggle="tab" href="#signup-form">Sign Up</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        {% if error_signup %}
+                        <div class="tab-pane fade" id="login-form">
+                            {% else %}
+                            <div class="tab-pane fade show active" id="login-form">
+                                {% endif %}
+                                {% if error %}
+                                <div class="alert alert-danger">{{ error }}</div>
+                                {% endif %}
+                                {% with successful_signup_msg =
+                                get_flashed_messages(category_filter=["success_msg"]) %}
+                                {% if successful_signup_msg %}
+                                <div class="alert alert-success">{{ successful_signup_msg[0] }}</div>
+                                {% endif %}
+                                {% endwith %}
+                                <form method="POST" action="{{url_for('auth.login')}}">
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </form>
+                            </div>
+                            {% if error_signup %}
+                            <div class="tab-pane fade show active" id="signup-form">
+                                {% for error in error_signup %}
+                                <div class="alert alert-danger">{{ error }}</div>
+                                {% endfor %}
+                                {% else %}
+                                <div class="tab-pane fade" id="signup-form">
+                                    {% endif%}
+                                    <form method="POST" action="{{ url_for('auth.signup') }}">
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="confirm-password">Confirm Password</label>
+                                            <input type="password" class="form-control" id="confirm-password"
+                                                name="confirm-password">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endwith %}
+                </div>
+                {% endblock %}
