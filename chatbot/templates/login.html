@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 {%block title %}Login{% endblock %}
 {% block HTML_BODY %}
+
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="card">
                 {% with error_signup = get_flashed_messages(category_filter=["error_signup"]) %}
                 <div class="card-header">
                     <ul class="nav nav-pills nav-fill" id="toggle-forms" role="tablist">
                         {% if error_signup %}
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-toggle="tab" href="#login-form">Login</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#login-form">Login</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" data-toggle="tab" href="#signup-form">Sign Up</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#signup-form">Sign Up</a>
                         </li>
                         {% else %}
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" data-toggle="tab" href="#login-form">Login</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#login-form">Login</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-toggle="tab" href="#signup-form">Sign Up</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#signup-form">Sign Up</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -42,13 +43,15 @@
                                 {% endif %}
                                 {% endwith %}
                                 <form method="POST" action="{{url_for('auth.login')}}">
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username">
+                                    <div class="form-floating mb-4">
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            placeholder="">
+                                        <label class="form-label" for="username">Username</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password">
+                                    <div class="form-floating mb-4">
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="">
+                                        <label class="form-label" for="password">Password</label>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Login</button>
                                 </form>
@@ -62,25 +65,30 @@
                                 <div class="tab-pane fade" id="signup-form">
                                     {% endif%}
                                     <form method="POST" action="{{ url_for('auth.signup') }}">
-                                        <div class="form-group">
+                                        <div class="form-floating mb-4">
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username">
+
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-floating mb-4">
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email">
+
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-floating mb-4">
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                placeholder="">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password">
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="confirm-password">Confirm Password</label>
+                                        <div class="form-floating mb-4">
                                             <input type="password" class="form-control" id="confirm-password"
-                                                name="confirm-password">
+                                                name="confirm-password" placeholder="">
+                                            <label for="confirm-password">Confirm Password</label>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Sign Up</button>

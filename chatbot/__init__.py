@@ -1,5 +1,4 @@
 # Initialize Flask Application
-from flask_login import LoginManager
 from flask import Flask
 from .database import db, login_manager
 from .auth import auth
@@ -10,7 +9,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SECRET_KEY"] = "212af25dbb394c6282e6be9a6156f9e5"
 app.register_blueprint(auth)
 app.register_blueprint(home)
-
 
 login_manager.init_app(app)
 
