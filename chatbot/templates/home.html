@@ -11,8 +11,29 @@
   </head>
   <body>
     <main class="flex-shrink-0">
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/home"
+            >CHATBOT
+            <img
+              src="{{ url_for('static' , filename='tiger.jpeg')}}"
+              alt="Logo"
+              width="30"
+              height="24"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <form class="d-flex" role="search">
+            <a class="navbar-brand">SEARCH CHATS</a>
+            <a class="btn btn-primary" href="/logout">Logout </a>
+          </form>
+        </div>
+      </nav>
       <div class="container">
         <h1 class="mt-5">Chat with openai (temp)</h1>
+        <p id="instructions">
+          Here are the instructions for how to use this chatbot. Enjoy!
+        </p>
 
         <div id="list-group" class="list-group w-auto"></div>
 
