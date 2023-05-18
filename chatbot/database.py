@@ -20,7 +20,8 @@ def authenticate(username, password):
 class ChatRecord(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String)
-    text = db.Column(db.String)
+    prompt = db.Column(db.String)
+    response = db.Column(db.String)
     # maybe add a date here?
 
 
@@ -46,10 +47,11 @@ def new_user(username, email, password):
     db.session.commit()
 
 
-def new_record(user_id, text):
+def new_record(user_id, prompt, response):
     record = ChatRecord(
         user_id=user_id,
-        text=text
+        prompt=prompt,
+        response=response
     )
     db.session.add(record)
     db.session.commit()

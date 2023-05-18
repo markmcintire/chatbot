@@ -15,7 +15,7 @@ def homepage():
         prompt = request.form['prompt']
         answer = gpt_response(prompt)
 
-        new_record(current_user.id, answer)
+        new_record(current_user.id, prompt, answer)
 
         res = {}
         res['answer'] = answer
