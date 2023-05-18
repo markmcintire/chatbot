@@ -1,119 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Uncontextualized Chatbot</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <main class="flex-shrink-0">
-      <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/home"
-            >CHATBOT
-            <img
-              src="{{ url_for('static' , filename='tiger.jpeg')}}"
-              alt="Logo"
-              width="30"
-              height="24"
-              class="d-inline-block align-text-top"
-            />
-          </a>
-          <form class="d-flex" role="search">
-            <a class="navbar-brand">SEARCH CHATS</a>
-            <a class="btn btn-primary" href="/logout">Logout </a>
-          </form>
-        </div>
-      </nav>
-      <div class="container">
-        <h1 class="mt-5">Chat with openai (temp)</h1>
-        <p id="instructions">
-          Here are the instructions for how to use this chatbot. Enjoy!
-        </p>
+{%extends "base.html"%}
+{%block title%}Home - Chatbot{%endblock%}
 
-        <div id="list-group" class="list-group w-auto"></div>
+{%block HTML_HEAD%}
+<style>
+  .author {
+    font-weight: bold;
+  }
 
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="chat-input"
-            placeholder="Enter Prompt...."
-          />
+  .date {
+    color: #999;
+  }
+</style>
+{%endblock%}
 
-          <div class="input-group-append">
-            <button id="submit-button" class="btn btn-dark rounded-pill px-3">
-              Submit
-            </button>
+{%block HTML_BODY%}
+<div class="container-sm overflow-auto" ststartyle="max-height: 600px;">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-md-8">
+      <div class="card border-0 bg-light rounded position-relative mb-5 mt-5 d-inline-block">
+        <div class="card-body p-3">
+          <div class="d-flex flex-row-reverse">
+            <p class="ps-0 pt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit
+              amet,
+              consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit
+              amet,
+              consectetur adipiscing elit.</p>
           </div>
+        </div>
+        <div class="author-date position-absolute top-0 end-0 p-3">
+          <span class="author me-2">Me</span>
+          <span class="date">May 17, 2023</span>
         </div>
       </div>
-    </main>
+    </div>
+  </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.6.3.min.js"
-      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"
-    ></script>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card border-0 bg-light rounded position-relative mb-5 d-inline-block">
+        <div class="card-body p-3">
+          <p class="ps-0 pt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.</p>
+        </div>
+        <div class="author-date position-absolute top-0 start-0 p-3">
+          <span class="author me-2">John Doe</span>
+          <span class="date">May 17, 2023</span>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
 
-    <script>
-      $("#submit-button").click(function () {
-        var user_input = $("#chat-input").val();
-
-        let child_element = "";
-        child_element += `<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3">
-        <img
-          src="{{ url_for('static' , filename='tiger.jpeg')}}"
-          alt="twbs"
-          width="32"
-          height="32"
-          class="rounded-circle flex-shrink-0"
-        />
-        <div class="d-flex gap-2 w-100 justify-content-between">
-          <div>
-            <p class="mb-0 opacity-75">${user_input}</p>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-md-8">
+      <div class="card border-0 bg-light rounded position-relative mb-5 d-inline-block">
+        <div class="card-body p-3">
+          <div class="d-flex flex-row-reverse">
+            <p class="ps-0 pt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit
+              amet,
+              consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit
+              amet,
+              consectetur adipiscing elit.</p>
           </div>
         </div>
-      </a>`;
+        <div class="author-date position-absolute top-0 end-0 p-3">
+          <span class="author me-2">Me</span>
+          <span class="date">May 17, 2023</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        $("#chat-input").val("");
+</div>
 
-        $("#list-group").append(child_element);
 
-        //AJAX SERVER CALL
-        $.ajax({
-          type: "POST",
-          url: "/home",
-          data: { prompt: user_input },
-          success: function (data) {
-            let gpt_response = "";
-            gpt_response += `<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3">
-              <img
-                src="{{ url_for('static' , filename='tiger.jpeg')}}"
-                alt="twbs"
-                width="32"
-                height="32"
-                class="rounded-circle flex-shrink-0"
-              />
-              <div class="d-flex gap-2 w-100 justify-content-between">
-                <div>
-                  <p class="mb-0 opacity-75">${data.answer}</p>
-                </div>
-              </div>
-            </a>`;
-            $("#list-group").append(gpt_response);
-          },
-        });
-      });
-    </script>
-  </body>
-</html>
+<div class="container">
+  <div class="col"></div>
+  <div class="row fixed-bottom justify-content-center mb-2">
+    <div class="col-md-5">
+      <textarea class="form-control" rows="2"></textarea>
+    </div>
+  </div>
+</div>
+{%endblock%}

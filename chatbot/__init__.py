@@ -2,7 +2,7 @@
 from flask import Flask
 from .database import db, login_manager
 from .auth import auth
-from .home import home
+from .home import home, is_active
 
 app = Flask(__name__, template_folder='templates')
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
@@ -15,5 +15,8 @@ login_manager.init_app(app)
 db.init_app(app)
 with app.app_context():
     db.create_all()
+
+app.jinja_env.globals.update(is_active=is_active)
+
 
 
