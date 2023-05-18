@@ -46,6 +46,15 @@ def new_user(username, email, password):
     db.session.commit()
 
 
+def new_record(user_id, text):
+    record = ChatRecord(
+        user_id=user_id,
+        text=text
+    )
+    db.session.add(record)
+    db.session.commit()
+
+
 @login_manager.user_loader
 def find_user_by_id(user_id):
     return User.query.get(user_id)
