@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import ARRAY
 from flask_login import UserMixin, LoginManager
 import base64
 import uuid
@@ -19,6 +20,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String)
     password = db.Column(db.String)
+    previous_chats = db.Column(ARRAY(db.String))
     def check_password(self, password):
         return check_password_hash(base64.b64decode(self.password.encode()).decode(), password)
 
