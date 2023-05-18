@@ -1,6 +1,5 @@
 from flask import Flask, Blueprint, render_template, request, jsonify
 from flask_login import login_required
-from .chat import gpt_response
 
 search = Blueprint('search', __name__)
 
