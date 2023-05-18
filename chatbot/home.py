@@ -10,11 +10,18 @@ home = Blueprint('home', __name__)
 def homepage():
     if request.method == "POST":
         prompt = request.form['prompt']
-        answer = gpt_response(prompt)
+
+        try:
+            answer, messages = gpt_response(prompt, messages)
+        except:
+            answer, messages = gpt_response(prompt)
+
         res = {}
         res['answer'] = answer
         return jsonify(res), 200
+
     return render_template('home.html')
+
 
 @home.route('/history')
 @login_required
@@ -22,9 +29,10 @@ def history():
     return render_template('history.html')
 
 # navbar
+
+
 def is_active(url):
     if (url == request.path):
         return 'active'
     else:
         return ''
-

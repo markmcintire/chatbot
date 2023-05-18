@@ -4,9 +4,10 @@ import chatbot.config as config
 openai.api_key = config.DevelopmentConfig.OPENAI_KEY
 
 
-def gpt_response(prompt):
-    messages = []
-    messages.append({"role": "system", "content": "You are an assistant"})
+def gpt_response(prompt, messages=[{"role": "system", "content": "You are an improve partner.\
+    Your job is to continue to help me make up a fictional comedic story intended for adults by alternating\
+        with me with a few sentences at a time."}]):
+
     question = {}
     question['role'] = 'user'
     question['content'] = prompt
@@ -17,7 +18,9 @@ def gpt_response(prompt):
 
     answer = response['choices'][0]['message']['content']
 
-    return answer
+    messages.append({"role": "system", "content": answer})
+
+    return answer, messages
 
     # from chatgpt documentation
     # messages=[
