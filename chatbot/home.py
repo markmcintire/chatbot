@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, jsonify
-from flask_login import login_required
+from flask_login import login_required, current_user
 from .chat import gpt_response
+from .database import new_record
 
 home = Blueprint('home', __name__)
 
@@ -9,12 +10,15 @@ home = Blueprint('home', __name__)
 @login_required
 def homepage():
     if request.method == "POST":
+
         prompt = request.form['prompt']
 
         try:
             answer, messages = gpt_response(prompt, messages)
         except:
             answer, messages = gpt_response(prompt)
+
+        new_record(current_user.id, prompt, answer)
 
         res = {}
         res['answer'] = answer
