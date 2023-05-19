@@ -27,10 +27,10 @@ def homepage():
     return render_template('home.html')
 
 
-@home.route('/history')
+@home.route('/search')
 @login_required
-def history():
-    return render_template('history.html')
+def search():
+    return render_template('search.html')
 
 # navbar
 
