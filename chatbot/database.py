@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
 from flask_login import UserMixin, LoginManager
 import base64
 import uuid
@@ -21,7 +22,7 @@ class ChatRecord(db.Model):
     user_id = db.Column(db.String)
     prompt = db.Column(db.String)
     response = db.Column(db.String)
-    # maybe add a date here?
+    created_at = db.Column(db.DateTime)
 
 
 class User(db.Model, UserMixin):
@@ -50,7 +51,8 @@ def new_record(user_id, prompt, response):
     record = ChatRecord(
         user_id=user_id,
         prompt=prompt,
-        response=response
+        response=response,
+        created_at=func.now()
     )
     db.session.add(record)
     db.session.commit()
