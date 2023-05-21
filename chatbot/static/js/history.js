@@ -35,7 +35,7 @@ function populateSearchResults(json) {
         el.innerText = `${v.created_at} - ${v.message}`;
         el.record = v;
         el.onclick = (e) => {
-
+            requestChatHistory(el.record.chat_id)
         };
         searchResultContainer[0].appendChild(el);
     });
@@ -69,7 +69,7 @@ function requestChatHistory(chat_id) {
  * @param json JSON from /history
  */
 function populateChatHistory(json) {
-
+    console.log(json)
 }
 
 requestSearch("");
