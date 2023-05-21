@@ -12,7 +12,7 @@ $("#chattextarea").keypress(function (e) {
 });
 
 
-function add_user_reply(text) {
+function add_user_reply(text, date = new Date()) {
     const rowDiv = document.createElement('div');
     rowDiv.classList.add('row');
     const colDiv1 = document.createElement('div');
@@ -40,8 +40,7 @@ function add_user_reply(text) {
     authorSpan.innerHTML = `<img src="/../static/user.png" width="25" height="25" class="d-inline-block align-top" alt="" />  Me`;
     const dateSpan = document.createElement('span');
     dateSpan.classList.add('date');
-    const today = new Date();
-    dateSpan.textContent = today.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+    dateSpan.textContent = date.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
     authorDateDiv.appendChild(authorSpan);
     authorDateDiv.appendChild(dateSpan);
     cardDiv.appendChild(cardBodyDiv);
@@ -53,7 +52,7 @@ function add_user_reply(text) {
     container.appendChild(rowDiv);
 }
 
-function add_ai_response(text) {
+function add_ai_response(text, date = new Date()) {
     const rowDiv = document.createElement('div');
     rowDiv.classList.add('row');
     const colDiv1 = document.createElement('div');
@@ -81,8 +80,7 @@ function add_ai_response(text) {
     authorSpan.innerHTML =  `James the Wise`
     const dateSpan = document.createElement('span');
     dateSpan.classList.add('date');
-    const today = new Date();
-    dateSpan.textContent = today.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+    dateSpan.textContent = date.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
     authorDateDiv.appendChild(authorSpan);
     authorDateDiv.appendChild(dateSpan);
     cardDiv.appendChild(cardBodyDiv);

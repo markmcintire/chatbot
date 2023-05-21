@@ -70,10 +70,11 @@ function requestChatHistory(chat_id) {
  */
 function populateChatHistory(json) {
     json.result.forEach(v => {
+        const date = new Date(v.created_at);
         if (v.role === "user")
-            add_user_reply(v.message)
+            add_user_reply(v.message, date);
         else
-            add_ai_response(v.message)
+            add_ai_response(v.message, date);
     });
 }
 
