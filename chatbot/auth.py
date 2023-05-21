@@ -5,12 +5,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/')
-@login_required
-def index():
-    return redirect(url_for('home.homepage'))
-
-
+# General login code, logs them in if the password hashes match
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -25,6 +20,7 @@ def login():
         return render_template('login.html')
 
 
+# General code for signup and error states
 @auth.route('/signup', methods=['POST'])
 def signup():
     failed_signup = False
@@ -56,13 +52,23 @@ def signup():
     return redirect(url_for('auth.login'))
 
 
+# the default redirection for Flask-Login, the login page.
 @login_manager.unauthorized_handler
 def login_required_redirect():
     return redirect(url_for('auth.login'))
 
 
+# Uses Flask-Login function "logout_user()" and redirects them to the login page.
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
+
+
+# This code redirects all non-registered paths to the homepage, or the login page if logged out.
+@auth.route('/', defaults={'path': ''})
+@auth.route('/<path:path>')
+@login_required
+def index():
+    return redirect(url_for('home.homepage'))

@@ -33,6 +33,7 @@ def historypage():
         return render_template('history.html')
 
 
+# Runs a database query for the inputted search string.
 @history.route('/search', methods=["POST"])
 @login_required
 def search():

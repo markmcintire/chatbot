@@ -4,11 +4,14 @@ from .messages import MessagesHistory, construct_history
 from .database import MessageRecord, new_msg_record
 import uuid
 import openai
-openai.api_key = "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"
+import chatbot.config as config
+openai.api_key = config.DevelopmentConfig.OPENAI_KEY
 
 stream = Blueprint('stream', __name__)
 
 
+# This is code to stream a ChatGPT response while collecting the chunks in a string, and then store that string in the database with its application specific metadata.
+# It uses a message history retrieved from the database using the current chat_id, which specifies the context.
 def chat_gpt_response(messages, user_id):
     response = openai.ChatCompletion.create(
         model='gpt-3.5-turbo',
@@ -26,6 +29,8 @@ def chat_gpt_response(messages, user_id):
             new_msg_record(
                 user_id, session['chat_id'], session['chat_index'], 'assistant', reply)
             return "Fin"
+
+# This function handles setting up the application metadata for the chat messages, and then calling the message history constructor with it.
 
 
 @stream.route('/stream', methods=["POST"])

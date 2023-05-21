@@ -1,17 +1,20 @@
 {% extends "base.html" %}
-{%block title %}Search{% endblock %}
+{%block title %}History - Chatbot{% endblock %}
 {% block HTML_BODY %}
 
-<div class="container min-vh-100">
+<div class="container vw-100 min-vh-100 ms-0">
     <div class="row min-vh-100">
         <div class="col-6 col-md-4 bg-light">
             <label for="inputSearch">Search</label>
             <input type="search" class="form-control" id="inputSearch" placeholder="Enter search terms...">
+            <div class="mt-2"></div>
             <div class="list-group" id="containerSearchResult"></div>
         </div>
         <div class="col-12 col-md-8" id="chatArea">
             <div class="mt-4"></div>
-            <div id="chatcontainer" class="container-sm overflow-auto vh-80" style="max-height: 80vh">
+            <div id="chatcontainer" class="container-sm overflow-auto vh-80"
+                style="max-height: 80vh; position:absolute;">
+
             </div>
         </div>
     </div>

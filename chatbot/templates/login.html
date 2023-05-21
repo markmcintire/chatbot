@@ -24,7 +24,7 @@
                             <a class="nav-link" data-bs-toggle="tab" href="#signup-form">Sign Up</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" href="#signup-form">About</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#about-page">About</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -45,7 +45,7 @@
                                 <div class="alert alert-success">{{ successful_signup_msg[0] }}</div>
                                 {% endif %}
                                 {% endwith %}
-                                <form method="POST" action="{{url_for('auth.login')}}">
+                                <form id="login-form" method="POST" action="{{url_for('auth.login')}}">
                                     <div class="form-floating mb-4">
                                         <input type="text" class="form-control" id="username" name="username"
                                             placeholder="">
@@ -97,8 +97,21 @@
                                         <button type="submit" class="btn btn-light">Sign Up</button>
                                     </form>
                                 </div>
-
+                                <div class="tab-pane fade" id="about-page">
+                                    <h5 class="fw-bold">CITS3403 - Project 2</h5>
+                                    <p>A frontend using ChatGPT with a contextual clue, allowing it to act as an
+                                        improv
+                                        acting partner known as "James the Wise", for practicing conversational improv
+                                        work.
+                                    </p>
+                                    <h6 class="fw-bold">Authors</h6>
+                                    <p>Elliot Walker - 23639121
+                                        <br>Mark McIntire - 23904665
+                                        <br>Gianni Spadoni - 23802649
+                                    </p>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     {% endwith %}

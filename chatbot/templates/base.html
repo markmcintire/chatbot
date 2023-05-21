@@ -2,11 +2,26 @@
 <html>
 
 <head>
+  <link rel="icon" href="data:,">
   <script src="{{ url_for('static', filename='js/jquery-3.6.4.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <title>{% block title %}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+  <style>
+    .author {
+      font-weight: bold;
+    }
+
+    .date {
+      color: #999;
+    }
+
+    #chatcontainer {
+      overflow-x: hidden;
+      scrollbar-width: none;
+    }
+  </style>
   {% block HTML_HEAD %}{% endblock %}
 </head>
 

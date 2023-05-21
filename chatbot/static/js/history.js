@@ -30,9 +30,13 @@ function populateSearchResults(json) {
         el.type = "button";
         el.classList.add("list-group-item");
         el.classList.add("list-group-item-action");
-
+        date = new Date(v.created_at);
+        date_string = date.toLocaleDateString('en-US', {  month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'});
         // todo: make the date smaller, or move it somewhere nicer
-        el.innerText = `${v.created_at} - ${v.message}`;
+        el.innerText = `"${v.message}" - ${date_string}`;
         el.record = v;
         el.onclick = (e) => {
             requestChatHistory(el.record.chat_id)
@@ -69,6 +73,7 @@ function requestChatHistory(chat_id) {
  * @param json JSON from /history
  */
 function populateChatHistory(json) {
+    add_ai_response("Greetings, my dear friend! Are you ready for a wild and hilarious adventure?", null)
     json.result.forEach(v => {
         const date = new Date(v.created_at);
         if (v.role === "user")
