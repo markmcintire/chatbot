@@ -4,7 +4,9 @@ from .messages import MessagesHistory, construct_history
 from .database import MessageRecord, new_msg_record
 import uuid
 import openai
-openai.api_key = "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"
+import chatbot.config as config
+openai.api_key = config.DevelopmentConfig.OPENAI_KEY
+
 stream = Blueprint('stream', __name__)
 
 
