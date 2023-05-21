@@ -32,13 +32,13 @@ def signup():
     password = request.form['password']
     user = None
 
-    if (username != ''):
+    if username != '':
         user = retrieve_user(request.form['username'])
     else:
         failed_signup = True
         flash("Username field must not be empty", 'error_signup')
 
-    if (password == ''):
+    if password == '':
         failed_signup = True
         flash("Password field cannot be empty.", 'error_signup')
 

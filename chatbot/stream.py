@@ -19,8 +19,8 @@ def chat_gpt_response(messages, user_id):
     )
     reply = ""
     for chunk in response:
-        if (chunk['choices'][0]['finish_reason'] == None):
-            if (chunk['choices'][0]['delta'].get('content', None) != None):
+        if chunk['choices'][0]['finish_reason'] is None:
+            if chunk['choices'][0]['delta'].get('content', None) is not None:
                 reply += chunk['choices'][0]['delta']['content']
                 yield chunk['choices'][0]['delta']['content']
         else:
@@ -34,7 +34,7 @@ def chat_gpt_response(messages, user_id):
 def stream_it():
     request_data = request.json
     user_id = current_user.get_id()
-    if (request_data['new_chat']):
+    if request_data['new_chat']:
         session['chat_id'] = uuid.uuid4()
         session['chat_index'] = 0
     else:

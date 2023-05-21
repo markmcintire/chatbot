@@ -20,7 +20,7 @@ def search():
 
 
 def is_active(url):
-    if (url == request.path):
+    if url == request.path:
         return 'active'
     else:
         return ''
