@@ -1,6 +1,5 @@
 from flask import Flask, Blueprint, render_template, request, jsonify
 from flask_login import login_required, current_user
-from .database import new_record
 
 home = Blueprint('home', __name__)
 
@@ -15,6 +14,7 @@ def homepage():
 @login_required
 def search():
     return render_template('search.html')
+
 
 # navbar
 

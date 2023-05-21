@@ -18,14 +18,6 @@ def authenticate(username, password):
     return None
 
 
-class ChatRecord(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.String)
-    prompt = db.Column(db.String)
-    response = db.Column(db.String)
-    created_at = db.Column(db.DateTime)
-
-
 class MessageRecord(db.Model):
     id = db.Column(db.String, primary_key=True)
     user_id = db.Column(db.String)
@@ -33,6 +25,7 @@ class MessageRecord(db.Model):
     index = db.Column(db.Integer)
     role = db.Column(db.String)
     message = db.Column(db.String)
+    created_at = db.Column(db.DateTime)
 
 
 def new_msg_record(user_id, chat_id, index, role, message):
@@ -42,7 +35,8 @@ def new_msg_record(user_id, chat_id, index, role, message):
         chat_id=str(chat_id),
         index=index,
         role=role,
-        message=message
+        message=message,
+        created_at=func.now()
     )
     db.session.add(record)
     db.session.commit()
@@ -67,17 +61,6 @@ def new_user(username, email, password):
             generate_password_hash(password).encode()).decode()
     )
     db.session.add(user)
-    db.session.commit()
-
-
-def new_record(user_id, prompt, response):
-    record = ChatRecord(
-        user_id=user_id,
-        prompt=prompt,
-        response=response,
-        created_at=func.now()
-    )
-    db.session.add(record)
     db.session.commit()
 
 
