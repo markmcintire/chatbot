@@ -10,9 +10,12 @@
             <div class="list-group" id="containerSearchResult"></div>
         </div>
         <div class="col-12 col-md-8" id="chatArea">
-            Placeholder
+            <div class="mt-4"></div>
+            <div id="chatcontainer" class="container-sm overflow-auto vh-80" style="max-height: 80vh">
+            </div>
         </div>
     </div>
 </div>
 <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 {% endblock %}
