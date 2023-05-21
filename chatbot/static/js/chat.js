@@ -1,21 +1,14 @@
+var new_chat = 1
 $("#chattextarea").keypress(function (e) {
     if(e.which === 13 && !e.shiftKey) {
         e.preventDefault();
     var text = $(this).val();
+    this.disabled = true;
     $(this).val('');
     add_user_reply(text);
     
-    $.ajax({
-    type: "POST",
-    url: "/home",
-    data: { prompt: text },
-    success: function(data) {
-        add_ai_response(data.answer);
-        const element = document.getElementById("chatcontainer");
-    element.scrollTop = element.scrollHeight;
-    }
-    });
-
+    begin_stream(text, this)
+    
     
     }
 });
@@ -58,7 +51,7 @@ cardDiv.appendChild(authorDateDiv);
 rowDiv.appendChild(colDiv1);
 rowDiv.appendChild(colDiv2);
 colDiv2.appendChild(cardDiv);
-const container = document.querySelector('div.container-sm.overflow-auto');
+const container = document.getElementById("chatcontainer");
 container.appendChild(rowDiv);
 }
 
@@ -87,7 +80,7 @@ function add_ai_response(text) {
     authorDateDiv.classList.add('author-date', 'position-absolute', 'top-0', 'start-0', 'p-3');
     const authorSpan = document.createElement('span');
     authorSpan.classList.add('author', 'me-2');
-    authorSpan.textContent = 'ChatGPT';
+    authorSpan.textContent = 'Improv Bot';
     const dateSpan = document.createElement('span');
     dateSpan.classList.add('date');
     const today = new Date();
@@ -99,6 +92,59 @@ function add_ai_response(text) {
     rowDiv.appendChild(colDiv2);
     rowDiv.appendChild(colDiv1);
     colDiv2.appendChild(cardDiv);
-    const container = document.querySelector('div.container-sm.overflow-auto');
+    const container = document.getElementById("chatcontainer");
     container.appendChild(rowDiv);
+    return paragraphElem
+}
+
+function begin_stream(input, inputbox) {
+    textbox = add_ai_response("")
+    const container = document.getElementById("chatcontainer");
+    fetch("/stream", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({input: input, new_chat: new_chat})
+    })
+    .then(response => {
+      const reader = response.body.getReader();
+      return new ReadableStream({
+        start(controller) {
+          function push() {
+            reader.read().then(({ done, value }) => {
+              if (done) {
+                controller.close();
+                return;
+              }
+              controller.enqueue(value);
+              push();
+            });
+          }
+          push();
+        }
+      });
+    })
+    .then(stream => {
+      const decoder = new TextDecoder();
+      const reader = stream.getReader();
+      function readChunk() {
+        reader.read().then(({ done, value }) => {
+          if (done) {
+            console.log('End of stream');
+            inputbox.disabled = false
+            return;
+          }
+          textbox.innerText += decoder.decode(value);
+          container.scrollTop = container.scrollHeight;
+          readChunk();
+        });
+      }
+      readChunk();
+    })
+    .catch(error => {
+      console.error(error);
+    });
+    new_chat = 0
+    
 }

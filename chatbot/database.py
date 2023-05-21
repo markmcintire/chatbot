@@ -2,6 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from flask_login import UserMixin, LoginManager
+
 import base64
 import uuid
 
@@ -23,6 +24,28 @@ class ChatRecord(db.Model):
     prompt = db.Column(db.String)
     response = db.Column(db.String)
     created_at = db.Column(db.DateTime)
+
+
+class MessageRecord(db.Model):
+    id = db.Column(db.String, primary_key=True)
+    user_id = db.Column(db.String)
+    chat_id = db.Column(db.String)
+    index = db.Column(db.Integer)
+    role = db.Column(db.String)
+    message = db.Column(db.String)
+
+
+def new_msg_record(user_id, chat_id, index, role, message):
+    record = MessageRecord(
+        id=str(uuid.uuid4()),
+        user_id=user_id,
+        chat_id=str(chat_id),
+        index=index,
+        role=role,
+        message=message
+    )
+    db.session.add(record)
+    db.session.commit()
 
 
 class User(db.Model, UserMixin):
