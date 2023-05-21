@@ -1,6 +1,6 @@
 ﻿const searchResultContainer = $("#containerSearchResult");
 const searchInputBox = $("#inputSearch");
-const chatAreaContainer = $("#chatArea");
+const chatAreaContainer = $("#chatcontainer");
 
 /**
  * Request conversations with a suitable message based on query
@@ -35,7 +35,7 @@ function populateSearchResults(json) {
         el.innerText = `${v.created_at} - ${v.message}`;
         el.record = v;
         el.onclick = (e) => {
-
+            requestChatHistory(el.record.chat_id)
         };
         searchResultContainer[0].appendChild(el);
     });
@@ -69,7 +69,12 @@ function requestChatHistory(chat_id) {
  * @param json JSON from /history
  */
 function populateChatHistory(json) {
-
+    json.result.forEach(v => {
+        if (v.role === "user")
+            add_user_reply(v.message)
+        else
+            add_ai_response(v.message)
+    });
 }
 
 requestSearch("");

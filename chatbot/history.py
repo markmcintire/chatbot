@@ -10,7 +10,27 @@ history = Blueprint('history', __name__)
 @history.route('/history', methods=["POST", "GET"])
 @login_required
 def historypage():
-    return render_template('history.html')
+    if request.method == 'POST':
+        request_data = request.json
+        chat_id = request_data["chat_id"]
+
+        response_dict = {"result": []}
+
+        records = MessageRecord.query.filter(MessageRecord.chat_id == chat_id) \
+            .filter(MessageRecord.user_id == current_user.get_id())
+
+        for record in records:
+            response_dict["result"].append({
+                "message": record.message,
+                "chat_id": record.chat_id,
+                "role": record.role,
+                "created_at": record.created_at,
+                "index": record.index
+            })
+
+        return jsonify(response_dict)
+    else:
+        return render_template('history.html')
 
 
 @history.route('/search', methods=["POST"])
@@ -21,6 +41,7 @@ def search():
 
     # Let's find conversations (or "prompts") with the query
     query_result = MessageRecord.query \
+        .filter(MessageRecord.user_id == current_user.get_id()) \
         .filter(func.lower(MessageRecord.message).contains(func.lower(literal(query_text)))) \
         .filter(MessageRecord.role == "user") \
         .group_by(MessageRecord.chat_id)
