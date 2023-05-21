@@ -10,15 +10,6 @@ def homepage():
     return render_template('home.html')
 
 
-@home.route('/search')
-@login_required
-def search():
-    return render_template('search.html')
-
-
-# navbar
-
-
 def is_active(url):
     if url == request.path:
         return 'active'
