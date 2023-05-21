@@ -30,7 +30,9 @@ function populateSearchResults(json) {
         el.type = "button";
         el.classList.add("list-group-item");
         el.classList.add("list-group-item-action");
-        el.innerText = v.message;
+
+        // todo: make the date smaller, or move it somewhere nicer
+        el.innerText = `${v.created_at} - ${v.message}`;
         el.record = v;
         el.onclick = (e) => {
 

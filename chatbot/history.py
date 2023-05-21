@@ -30,7 +30,8 @@ def search():
     for record in query_result:
         response_dict["result"].append({
             "message": record.message,
-            "chat_id": record.chat_id
+            "chat_id": record.chat_id,
+            "created_at": record.created_at
         })
 
     return jsonify(response_dict)
