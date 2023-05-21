@@ -1,7 +1,5 @@
-{%extends "base.html"%}
-{%block title%}Home - Chatbot{%endblock%}
-
-{%block HTML_HEAD%}
+{%extends "base.html"%} {%block title%}Home - Chatbot{%endblock%} {%block
+HTML_HEAD%}
 <style>
   .author {
     font-weight: bold;
@@ -16,20 +14,34 @@
     scrollbar-width: none;
   }
 </style>
-{%endblock%}
-
-{%block HTML_BODY%}
-<div id="chatcontainer" class="container-sm overflow-auto vh-80" style="max-height: 80vh;">
+{%endblock%} {%block HTML_BODY%}
+<div
+  id="chatcontainer"
+  class="container-sm overflow-auto vh-80"
+  style="max-height: 80vh"
+>
   <div class="row">
     <div class="col-md-8 text-start">
-      <div class="card border-0 bg-light rounded position-relative mb-5 mt-5 d-inline-block">
+      <div
+        class="card border-0 bg-light rounded position-relative mb-5 mt-5 d-inline-block"
+      >
         <div class="card-body p-3">
-          <p class="ps-0 pt-4" style="min-width: 300px; max-width: 860px;">
-            Greetings, my dear friend! Are you ready for a wild and hilarious adventure?
+          <p class="ps-0 pt-4" style="min-width: 300px; max-width: 860px">
+            Greetings, my dear friend! Are you ready for a wild and hilarious
+            adventure?
           </p>
         </div>
         <div class="author-date position-absolute top-0 start-0 p-3">
-          <span class="author me-2">Improv Bot</span>
+          <span class="author me-2">
+            <img
+              src="/../static/icon.png"
+              width="25"
+              height="25"
+              class="d-inline-block align-top"
+              alt=""
+            />
+            James the Wise</span
+          >
           <span id="initialdate_" class="date"></span>
         </div>
       </div>
@@ -37,7 +49,6 @@
     <div class="col"></div>
   </div>
 </div>
-
 
 <div class="container">
   <div class="col"></div>
