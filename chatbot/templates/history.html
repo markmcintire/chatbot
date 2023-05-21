@@ -7,10 +7,12 @@
         <div class="col-6 col-md-4 bg-light">
             <label for="inputSearch">Search</label>
             <input type="search" class="form-control" id="inputSearch" placeholder="Enter search terms...">
+            <div class="list-group" id="containerSearchResult"></div>
         </div>
         <div class="col-12 col-md-8">
             Placeholder
         </div>
     </div>
 </div>
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
 {% endblock %}
