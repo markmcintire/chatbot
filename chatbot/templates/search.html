@@ -1,9 +1,16 @@
 {% extends "base.html" %}
-{%block title %}Login{% endblock %}
+{%block title %}Search{% endblock %}
 {% block HTML_BODY %}
 
-<div class="container mt-5">
-
+<div class="container min-vh-100">
+    <div class="row min-vh-100">
+        <div class="col-6 col-md-4 bg-light">
+            <label for="inputSearch">Search</label>
+            <input type="search" class="form-control" id="inputSearch" placeholder="Enter search terms...">
+        </div>
+        <div class="col-12 col-md-8">
+            Placeholder
+        </div>
+    </div>
 </div>
-
 {% endblock %}
