@@ -1,42 +1,71 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <script src="{{ url_for('static', filename='js/jquery-3.6.4.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
     <title>{% block title %}{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+      rel="stylesheet"
+    />
     {% block HTML_HEAD %}{% endblock %}
-</head>
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">chatbot CITS3403</a>
-            {% if current_user.is_authenticated %}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link {{ is_active('/home') }}" href="{{url_for('home.homepage')}}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ is_active('/history') }}" href="{{url_for('history.historypage')}}">History</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
-                    </li>
-                </ul>
-            </div>
-            {% endif %}
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="/../static/icon.png"
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          Improv Bot
+        </a>
+        {% if current_user.is_authenticated %}
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link {{ is_active('/home') }}"
+                href="{{url_for('home.homepage')}}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {{ is_active('/history') }}"
+                href="{{url_for('history.historypage')}}"
+                >History</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-dark" href="{{url_for('auth.logout')}}"
+                >Logout</a
+              >
+            </li>
+          </ul>
         </div>
+        {% endif %}
+      </div>
     </nav>
     {% block HTML_BODY %}{% endblock %}
-
-</body>
-
+  </body>
 </html>

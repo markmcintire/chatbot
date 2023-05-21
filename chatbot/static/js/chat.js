@@ -39,7 +39,7 @@ const authorDateDiv = document.createElement('div');
 authorDateDiv.classList.add('author-date', 'position-absolute', 'top-0', 'end-0', 'p-3');
 const authorSpan = document.createElement('span');
 authorSpan.classList.add('author', 'me-2');
-authorSpan.textContent = 'Me';
+authorSpan.innerHTML = `<img src="/../static/user.png" width="25" height="25" class="d-inline-block align-top" alt="" />  Me`;
 const dateSpan = document.createElement('span');
 dateSpan.classList.add('date');
 const today = new Date();
@@ -80,7 +80,7 @@ function add_ai_response(text) {
     authorDateDiv.classList.add('author-date', 'position-absolute', 'top-0', 'start-0', 'p-3');
     const authorSpan = document.createElement('span');
     authorSpan.classList.add('author', 'me-2');
-    authorSpan.textContent = 'Improv Bot';
+    authorSpan.innerHTML =  `<img src="/../static/icon.png" width="25" height="25" class="d-inline-block align-top" alt="" /> James the Wise`
     const dateSpan = document.createElement('span');
     dateSpan.classList.add('date');
     const today = new Date();
