@@ -80,7 +80,7 @@ function add_ai_response(text) {
     authorDateDiv.classList.add('author-date', 'position-absolute', 'top-0', 'start-0', 'p-3');
     const authorSpan = document.createElement('span');
     authorSpan.classList.add('author', 'me-2');
-    authorSpan.innerHTML =  `<img src="/../static/icon.png" width="25" height="25" class="d-inline-block align-top" alt="" /> James the Wise`
+    authorSpan.innerHTML =  `James the Wise`
     const dateSpan = document.createElement('span');
     dateSpan.classList.add('date');
     const today = new Date();
