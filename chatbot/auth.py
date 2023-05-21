@@ -8,7 +8,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/')
 @login_required
 def index():
-    return redirect(url_for('home'))
+    return redirect(url_for('home.homepage'))
 
 
 @auth.route('/login', methods=['GET', 'POST'])
